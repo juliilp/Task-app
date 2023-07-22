@@ -17,7 +17,7 @@ export default function CrearTareas() {
     <section className="flex justify-center items-center w-full h-screen">
       <form
         className="border py-6 flex flex-col px-4 gap-6"
-        onSubmit={() => handlerAgregarTareas(datos)}
+        onSubmit={(event) => handlerAgregarTareas(event, datos)}
       >
         <div className="flex gap-4">
           <span>Titulo</span>

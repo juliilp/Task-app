@@ -110,11 +110,12 @@ export default function AuthProvider({ children }) {
     }
     getTareas();
   };
-  const handlerAgregarTareas = (datos) => {
+  const handlerAgregarTareas = (evento, datos) => {
+    evento.preventDefault();
     async function agregarTarea() {
       try {
         await axios.post("/tareas/creartarea", datos);
-        alert("Tarea creada");
+        navigate("/");
       } catch (error) {
         console.log(error);
       }
