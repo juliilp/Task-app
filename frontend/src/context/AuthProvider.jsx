@@ -15,12 +15,15 @@ export default function AuthProvider({ children }) {
   const [loginError, setLoginError] = useState(null);
   const [registerError, setRegisterError] = useState(null);
   const [user, setUser] = useState(null);
+  const [activateMenu, setActivateMenu] = useState(false);
   const [authenticacion, setAuthenticacion] = useState(
     cookies.token ? true : false
   );
   const [allTareas, setAllTareas] = useState(null);
   const [tareaDetail, setTareaDetail] = useState(null);
   const [idTareas, setIdTareas] = useState([]);
+  const [editError, setEditError] = useState("");
+  const [crearTareaError, setCrearTareaError] = useState("");
   const verifyToken = () => axios.get("/user/token");
   useEffect(() => {
     const cookies = Cookies.get();
@@ -85,6 +88,7 @@ export default function AuthProvider({ children }) {
   };
 
   const handlerLogout = () => {
+    setActivateMenu((prev) => !prev);
     async function disconnect() {
       try {
         await axios.post("/user/logout");
@@ -112,6 +116,11 @@ export default function AuthProvider({ children }) {
   };
   const handlerAgregarTareas = (evento, datos) => {
     evento.preventDefault();
+    if (datos.titulo.length < 3 || datos.tarea.length < 3) {
+      return setCrearTareaError("Mínimo 3 letras");
+    } else {
+      return setCrearTareaError("");
+    }
     async function agregarTarea() {
       try {
         await axios.post("/tareas/creartarea", datos);
@@ -145,6 +154,12 @@ export default function AuthProvider({ children }) {
   };
   const handlerEdit = (evento, id, actualizarTarea) => {
     evento.preventDefault();
+    if (actualizarTarea.tarea.length < 3 || actualizarTarea.titulo.length < 3) {
+      return setEditError("Mínimo 4 caracteres");
+    } else {
+      setEditError("");
+    }
+
     async function taskEdit() {
       try {
         await axios.put(`/tareas/${id}`, actualizarTarea);
@@ -173,6 +188,11 @@ export default function AuthProvider({ children }) {
         idTareas,
         handlerDelete,
         handlerEdit,
+        editError,
+        setEditError,
+        setActivateMenu,
+        activateMenu,
+        crearTareaError,
       }}
     >
       {children}

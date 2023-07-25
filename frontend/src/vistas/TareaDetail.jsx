@@ -4,7 +4,14 @@ import { useAuth } from "../context/AuthProvider";
 
 export default function TareaDetail() {
   const navigate = useNavigate();
-  const { getTareaDetail, idTareas, tareaDetail, handlerEdit } = useAuth();
+  const {
+    getTareaDetail,
+    idTareas,
+    tareaDetail,
+    handlerEdit,
+    editError,
+    setEditError,
+  } = useAuth();
   const [actualizarTarea, setActualizarTarea] = useState({
     tarea: "",
     titulo: "",
@@ -20,7 +27,9 @@ export default function TareaDetail() {
   useEffect(() => {
     getTareaDetail(id);
   }, [id]);
-
+  useEffect(() => {
+    setEditError("");
+  }, []);
   const handlerInput = (e) => {
     setActualizarTarea({
       ...actualizarTarea,
@@ -28,31 +37,27 @@ export default function TareaDetail() {
     });
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    console.log(actualizarTarea);
-  };
+  console.log(editError);
   return (
     <section className="flex w-full h-screen justify-center items-center flex-col">
-      {tareaDetail && (
-        <>
-          <p>{tareaDetail.titulo}</p>
-          <p>{tareaDetail.tarea}</p>
-        </>
-      )}
-      <h2>Editar Tarea</h2>
+      <h1 className="text-3xl font-semibold">Editar Tarea</h1>
       <form
-        className="w-[350px] h-[300px] border flex justify-center  flex-col"
+        className="w-[90%] max-w-[650px] border flex flex-col gap-6 py-8 font-Roboto pl-4"
         onSubmit={(evento) =>
           handlerEdit(evento, tareaDetail.id, actualizarTarea)
         }
       >
         <div className="flex flex-col">
+          {editError.length > 0 && (
+            <span className="text-white bg-red-500 w-max p-2 px-6 rounded-sm font-medium mb-4">
+              {editError}
+            </span>
+          )}
           <span>Titulo</span>
           <input
             type="text"
             placeholder="titulo"
-            className="border outline-none"
+            className="bg-[#F8FAFA] py-2 outline-none placeholder:pl-2"
             onChange={handlerInput}
             name="titulo"
           />
@@ -62,12 +67,17 @@ export default function TareaDetail() {
           <input
             type="text"
             placeholder="tarea"
-            className="border outline-none"
+            className="bg-[#F8FAFA] py-2 outline-none placeholder:pl-2"
             onChange={handlerInput}
             name="tarea"
           />
         </div>
-        <button type="form">Cambiar datos</button>
+        <button
+          type="form"
+          className="text-white bg-blue-700 hover:bg-blue-800 rounded-lg text-sm w-max  px-5 py-2.5 text-center"
+        >
+          Cambiar datos
+        </button>
       </form>
     </section>
   );

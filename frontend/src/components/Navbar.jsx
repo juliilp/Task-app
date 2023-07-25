@@ -1,40 +1,75 @@
-import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
-import Cookies from "js-cookie";
+import { HiMenu } from "react-icons/hi";
 export default function Navbar() {
-  const [cookie, setCookie] = useState();
-  // useEffect(() => {
-  //   const cookies = Cookies.get();
-  //   if (cookies.token) {
-  //     setCookie(cookies);
-  //   }
-  // }, []);
-  const { user, handlerLogout, authenticacion } = useAuth();
-
+  const { user, handlerLogout, authenticacion, activateMenu, setActivateMenu } =
+    useAuth();
+  const handlerMenu = () => {
+    setActivateMenu((prev) => !prev);
+  };
   return (
-    <header className="w-full h-[10vh] border px-6">
-      <ul className={`flex  w-full ${authenticacion && "justify-around"}`}>
-        <Link to="/">
-          <li>Inicio</li>
-        </Link>
-        {authenticacion ? (
-          <>
-            <h2>{user && user.nombre}</h2>
-            <button onClick={handlerLogout}>Cerrar Sesión</button>
-            <Link to="/creartarea">Crear Tarea</Link>
-          </>
-        ) : (
-          <div className="flex gap-3">
-            <Link to="/login">
-              <li>Iniciar sesion</li>
+    <header className="w-full h-[7vh] fixed top-0 left-0 backdrop-blur-md z-50 border ">
+      <div className="w-full h-full flex justify-between items-center px-2">
+        <span className="font-semibold text-xl">Task-app</span>
+        <HiMenu size={30} onClick={handlerMenu} className="md:hidden" />
+        <ul className="hidden md:flex md:gap-3 ">
+          <li>
+            {authenticacion && (
+              <button onClick={handlerLogout}>Cerrar sesion</button>
+            )}
+          </li>
+          <li>
+            {authenticacion ? (
+              user && user.nombre
+            ) : (
+              <Link to="/login" onClick={handlerMenu}>
+                Iniciar sesion
+              </Link>
+            )}
+          </li>
+          <li>
+            {authenticacion ? (
+              <Link to="/creartarea" onClick={handlerMenu}>
+                Crear tarea
+              </Link>
+            ) : (
+              <Link to="/registro" onClick={handlerMenu}>
+                Registro
+              </Link>
+            )}
+          </li>
+        </ul>
+      </div>
+      {activateMenu && (
+        <>
+          <nav className=" my-3 w-full h-full z-[999] flex flex-col justify-center items-center absolute md:hidden">
+            <Link to="/" onClick={handlerMenu}>
+              Inicio
             </Link>
-            <Link to="/registro">
-              <li>Registrarse</li>
-            </Link>
-          </div>
-        )}
-      </ul>
+            {authenticacion && (
+              <button onClick={handlerLogout}>Cerrar sesion</button>
+            )}
+            <span>
+              {authenticacion ? (
+                user && user.nombre
+              ) : (
+                <Link to="/login" onClick={handlerMenu}>
+                  Iniciar sesion
+                </Link>
+              )}
+            </span>
+            {authenticacion ? (
+              <Link to="/creartarea" onClick={handlerMenu}>
+                Crear tarea
+              </Link>
+            ) : (
+              <Link to="/registro" onClick={handlerMenu}>
+                Registro
+              </Link>
+            )}
+          </nav>
+        </>
+      )}
     </header>
   );
 }

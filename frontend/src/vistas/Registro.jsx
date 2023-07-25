@@ -32,33 +32,37 @@ export default function Registro() {
         onSubmit={(event) => handlerRegistro(event, userRegistro)}
       >
         <div className="flex gap-2 flex-col">
-          <p>{registerError && registerError.message}</p>
-          <span>Tu nombre</span>
+          {registerError && (
+            <p className="text-white bg-red-500 w-max p-2 px-6 rounded-sm font-medium">
+              {registerError.message}
+            </p>
+          )}
+          <span>Nombre</span>
           <input
             type="text"
             placeholder="name"
             name="nombre"
-            className="bg-[#F8FAFA] py-2 outline-none "
+            className="bg-[#F8FAFA] py-2 outline-none placeholder:pl-2"
             onChange={inputHandler}
           />
         </div>
         <div className="flex gap-2 flex-col">
-          <span>Tu email</span>
+          <span>Email</span>
           <input
             type="email"
             name="email"
             placeholder="user@gmail.com"
-            className="bg-[#F8FAFA] py-2 outline-none "
+            className="bg-[#F8FAFA] py-2 outline-none placeholder:pl-2 "
             onChange={inputHandler}
           />
         </div>
         <div className="flex gap-2 flex-col">
-          <span>Tu contraseña</span>
+          <span>Contraseña</span>
           <input
             type="password"
-            placeholder="******"
+            placeholder="**********"
             name="password"
-            className="bg-[#F8FAFA] py-2 outline-none "
+            className="bg-[#F8FAFA] py-2 outline-none  placeholder:pl-2 "
             onChange={inputHandler}
           />
         </div>
