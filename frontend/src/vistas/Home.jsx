@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthProvider";
 import { Link } from "react-router-dom";
 import { BsEyeFill } from "react-icons/bs";
 import { VscChromeClose } from "react-icons/vsc";
+import { motion } from "framer-motion";
 export default function Home() {
   const { authenticacion, allTareas, getAllTareas, handlerDelete, user } =
     useAuth();
@@ -10,11 +11,16 @@ export default function Home() {
     getAllTareas();
   }, []);
   return (
-    <section className="w-full h-screen flex mt-[7vh]">
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 2 }}
+      className="w-full h-screen flex mt-[7vh]"
+    >
       {authenticacion ? (
         <div className="">
           {allTareas && allTareas.length > 0 && (
-            <h1 className="text-3xl md:text-3xl lg:text-4xl my-8">
+            <h1 className="text-3xl md:text-3xl my-8 pl-4 md:pl-8 lg:pl-12">
               Mis Tareas
             </h1>
           )}
@@ -30,12 +36,15 @@ export default function Home() {
                     <span className="text-sm">{tarea.tarea}</span>
                     <div className="flex gap-2 absolute top-2 right-4">
                       <button
-                        className="hover:text-black"
+                        className="hover:scale-110 hover:duration-200"
                         onClick={() => handlerDelete(tarea.id)}
                       >
                         <VscChromeClose size={25} />
                       </button>
-                      <Link to={`/${tarea.id}`} className="hover:text-black">
+                      <Link
+                        to={`/${tarea.id}`}
+                        className="hover:scale-110 hover:duration-200"
+                      >
                         <BsEyeFill size={25} />
                       </Link>
                     </div>
@@ -54,6 +63,6 @@ export default function Home() {
           Queres ver tus tareas? logea
         </p>
       )}
-    </section>
+    </motion.section>
   );
 }
