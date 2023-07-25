@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthProvider";
+import { motion } from "framer-motion";
 export default function Login() {
   const { handlerLogin, loginError } = useAuth();
   const [userSesion, setUserSesion] = useState({
@@ -12,9 +13,13 @@ export default function Login() {
       [e.target.name]: e.target.value,
     });
   };
-  // console.log(loginError);
   return (
-    <section className="w-full h-screen flex justify-center items-center flex-col ">
+    <motion.section
+      className="w-full h-screen flex justify-center items-center flex-col"
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: [1, 1.05, 1] }}
+      transition={{ duration: 1 }}
+    >
       <h1 className="text-4xl font-semibold my-4 ">Inicia sesion</h1>
       <form
         onSubmit={(event) => handlerLogin(event, userSesion)}
@@ -52,6 +57,6 @@ export default function Login() {
           Iniciar sesion
         </button>
       </form>
-    </section>
+    </motion.section>
   );
 }

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../context/AuthProvider";
+import { motion } from "framer-motion";
 export default function CrearTareas() {
   const { handlerAgregarTareas, crearTareaError } = useAuth();
   const [datos, setDatos] = useState({
@@ -13,7 +14,12 @@ export default function CrearTareas() {
     });
   };
   return (
-    <section className="flex justify-center items-center w-full h-screen flex-col">
+    <motion.section
+      className="flex justify-center items-center w-full h-screen flex-col"
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: [1, 1.05, 1] }}
+      transition={{ duration: 1 }}
+    >
       <h1 className="text-3xl font-semibold mb-4">¡Crea tu Tarea!</h1>
       <form
         className=" w-[90%] max-w-[650px] border py-6 flex flex-col px-4 gap-6"
@@ -44,10 +50,13 @@ export default function CrearTareas() {
             placeholder="Escribí tu tarea..."
           />
         </div>
-        <button className="text-white bg-blue-700 hover:bg-blue-800 rounded-lg text-sm w-max  px-5 py-2.5 text-center ">
+        <button
+          type="submit"
+          className="text-white bg-blue-700 hover:bg-blue-800 rounded-lg text-sm w-max  px-5 py-2.5 text-center "
+        >
           Crear Tarea
         </button>
       </form>
-    </section>
+    </motion.section>
   );
 }

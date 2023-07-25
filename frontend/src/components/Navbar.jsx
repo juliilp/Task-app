@@ -24,7 +24,9 @@ export default function Navbar() {
         <HiMenu size={30} onClick={handlerMenu} className="md:hidden" />
         <ul className="hidden md:flex md:gap-3 ">
           <li>
-            <Link to="/">Inicio</Link>
+            <Link to="/" className="hover:underline">
+              Inicio
+            </Link>
           </li>
           <li>
             {authenticacion && (

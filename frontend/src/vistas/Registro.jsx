@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
+import { motion } from "framer-motion";
 export default function Registro() {
   const { handlerRegistro, user, authenticacion, registerError } = useAuth();
   const [userRegistro, setUserRegistro] = useState({
@@ -16,7 +17,12 @@ export default function Registro() {
     });
   };
   return (
-    <section className="w-full h-screen flex justify-center items-center flex-col">
+    <motion.section
+      className="w-full h-screen flex justify-center items-center flex-col"
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: [1, 1.05, 1] }}
+      transition={{ duration: 1 }}
+    >
       <h1 className="text-4xl font-semibold">¡Registrate!</h1>
       <span className="text-gray-400 text-sm">
         Ya estas registrado?{"  "}
@@ -73,6 +79,6 @@ export default function Registro() {
           Registrarse!
         </button>
       </form>
-    </section>
+    </motion.section>
   );
 }

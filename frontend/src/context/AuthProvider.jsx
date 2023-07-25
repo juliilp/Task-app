@@ -119,17 +119,17 @@ export default function AuthProvider({ children }) {
     if (datos.titulo.length < 3 || datos.tarea.length < 3) {
       return setCrearTareaError("Mínimo 3 letras");
     } else {
-      return setCrearTareaError("");
-    }
-    async function agregarTarea() {
-      try {
-        await axios.post("/tareas/creartarea", datos);
-        navigate("/");
-      } catch (error) {
-        console.log(error);
+      setCrearTareaError("");
+      async function agregarTarea() {
+        try {
+          await axios.post("/tareas/creartarea", datos);
+          navigate("/");
+        } catch (error) {
+          console.log(error);
+        }
       }
+      agregarTarea();
     }
-    agregarTarea();
   };
 
   const getTareaDetail = (id) => {
