@@ -9,7 +9,7 @@ export default function Navbar() {
   };
   return (
     <header className="w-full h-[7vh] fixed top-0 left-0 backdrop-blur-md z-50 border ">
-      <div className="w-full h-full flex justify-between items-center px-2">
+      <div className="w-full h-full flex justify-between items-center px-3 md:px-6">
         <span className="font-semibold text-xl">Task-app</span>
         <HiMenu size={30} onClick={handlerMenu} className="md:hidden" />
         <ul className="hidden md:flex md:gap-3 ">
@@ -42,7 +42,7 @@ export default function Navbar() {
       </div>
       {activateMenu && (
         <>
-          <nav className=" my-3 w-full h-full z-[999] flex flex-col justify-center items-center absolute md:hidden">
+          <nav className=" bg-white my-3 w-full h-full z-[999] flex flex-col justify-center items-center absolute md:hidden">
             <Link to="/" onClick={handlerMenu}>
               Inicio
             </Link>
