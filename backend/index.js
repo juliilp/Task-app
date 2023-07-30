@@ -9,7 +9,7 @@ server.use(express.json());
 server.use(morgan("dev"));
 server.use(
   cors({
-    origin: "https://task-app-wheat.vercel.app/",
+    origin: "https://task-app-wheat.vercel.app",
     credentials: true,
   })
 );
