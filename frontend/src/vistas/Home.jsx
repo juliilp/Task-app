@@ -59,9 +59,9 @@ export default function Home() {
           </div>
         </div>
       ) : (
-        <Link to="/creartarea">
+        <Link to="/login">
           <p className="mt-[8vh] text-center w-full text-2xl hover:underline pl-4 ">
-            ¡Crea tu primer tarea!
+            Inicia sesion
           </p>
         </Link>
       )}
