@@ -56,7 +56,11 @@ export const userLogin = async (req, res) => {
       { expiresIn: "1d" },
       (err, token) => {
         if (err) res.json({ err });
-        res.cookie("token", token);
+        res.cookie("token", token, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "None",
+        });
         console.log("Soy token " + token);
         res.json({ message: "usuario logeado" });
       }
