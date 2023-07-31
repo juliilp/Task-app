@@ -18,7 +18,7 @@ export default function Login() {
       className="w-full h-screen flex justify-center items-center flex-col"
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: [1, 1.05, 1] }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 0.6 }}
     >
       <h1 className="text-4xl font-semibold my-4 ">Inicia sesion</h1>
       <form

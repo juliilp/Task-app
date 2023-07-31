@@ -14,7 +14,7 @@ export default function Home() {
     <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 2 }}
+      transition={{ duration: 1.5 }}
       className="w-full h-screen flex mt-[7vh]"
     >
       {authenticacion ? (
