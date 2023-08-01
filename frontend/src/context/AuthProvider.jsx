@@ -34,6 +34,10 @@ export default function AuthProvider({ children }) {
           setAuthenticacion(true);
           setUser([data]);
           console.log(cookies.token);
+          Cookies.set("token", cookies.token, {
+            sameSite: "none",
+            secure: "true",
+          });
         }
         validate();
       } catch (error) {
