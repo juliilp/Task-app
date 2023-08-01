@@ -33,6 +33,7 @@ export default function AuthProvider({ children }) {
           const { data } = await verifyToken(cookies.token);
           setAuthenticacion(true);
           setUser([data]);
+          console.log(cookies.token);
         }
         validate();
       } catch (error) {
