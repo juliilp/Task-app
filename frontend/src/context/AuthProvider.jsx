@@ -39,6 +39,8 @@ export default function AuthProvider({ children }) {
       } catch (error) {
         console.log(error);
       }
+    } else {
+      console.log("No estoy viendo el token");
     }
   }, []);
   useEffect(() => {
