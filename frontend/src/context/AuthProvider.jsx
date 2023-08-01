@@ -42,7 +42,7 @@ export default function AuthProvider({ children }) {
     } else {
       console.log("No estoy viendo el token");
     }
-  }, []);
+  }, [cookies.token]);
   useEffect(() => {
     const array = [];
     allTareas &&
