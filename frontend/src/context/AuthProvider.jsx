@@ -56,7 +56,7 @@ export default function AuthProvider({ children }) {
         try {
           const { data } = await axios.post("/user/registro", userRegister);
           setUser(data);
-          alert("Usuario creado");
+          navigate("/login");
         } catch (error) {
           setAuthenticacion(false);
           setRegisterError(error.response.data);

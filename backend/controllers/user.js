@@ -55,9 +55,9 @@ export const userLogin = async (req, res) => {
       "secret123",
       { expiresIn: "1d" },
       (err, token) => {
-        if (err) res.json({ err });
+        if (err) return res.json({ err });
         res.cookie("token", token, {
-          httpOnly: true,
+          httpOnly: false,
         });
         console.log("Soy token " + token);
         res.json({ message: "usuario logeado" });
